@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0 1rem 0 1rem;
+`;
+
+const NavContainer = styled.nav`
 `;
 
 const NavItems = styled.ul`
@@ -26,6 +29,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <h1>React Weather App</h1>
+      <NavContainer>
       <NavItems>
         <NavItem>
           <NavLink href="https://duncanbain.dev">duncanbain.dev</NavLink>
@@ -37,6 +41,7 @@ const Header = () => {
           <a href="https://twitter.com/duncanbain">Twitter</a>
         </NavItem>
       </NavItems>
+      </NavContainer>
     </HeaderContainer>
   );
 };
