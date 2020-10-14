@@ -13,10 +13,9 @@ const AppContainer = styled.div`
 
 function App() {
 
-  const [locationSearchInput, setLocationSearchInput] = useState('Your location...')
+  const [locationSearchInput, setLocationSearchInput] = useState('')
 
   const updateLocationInput = (event) => {
-    event.preventDefault();
     setLocationSearchInput(event.target.value);
   }
 
@@ -25,7 +24,7 @@ function App() {
       <GlobalStyle />
       <Header />
       <AppContainer>
-        <LocationSearch locationSearchInput={locationSearchInput} updateLocationInput={updateLocationInput}/>
+        <LocationSearch locationSearchInput={locationSearchInput} updateLocationInput={updateLocationInput} />
       </AppContainer>
     </>
   );
