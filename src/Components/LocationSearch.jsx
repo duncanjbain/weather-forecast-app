@@ -4,7 +4,7 @@ import { ReactComponent as SearchIconSvg } from "../assets/svg/search.svg";
 import { ReactComponent as PointerIconSvg } from "../assets/svg/pointer.svg";
 
 const SearchContainer = styled.div`
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   margin-bottom: 1.4rem;
   border-radius: 26px;
   display: flex;
@@ -26,13 +26,13 @@ const LocationInput = styled.input`
 `;
 
 const SearchIcon = styled(SearchIconSvg)`
-  margin-left: 2rem;
+  margin-left: 1.5rem;
   height: 1.5rem;
   width: auto;
 `;
 
 const PointerIcon = styled(PointerIconSvg)`
-  margin-right: 2rem;
+  margin-right: 1.5rem;
   height: 1.5rem;
   width: auto;
 `;
