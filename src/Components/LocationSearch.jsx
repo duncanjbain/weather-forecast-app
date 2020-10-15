@@ -15,8 +15,8 @@ const SearchContainer = styled.div`
 
 const LocationInput = styled.input`
   flex: 1;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   height: 3rem;
   border: none;
   font-size: 1.125rem;
@@ -27,13 +27,13 @@ const LocationInput = styled.input`
 
 const SearchIcon = styled(SearchIconSvg)`
   margin-left: 2rem;
-  height: 2rem;
+  height: 1.5rem;
   width: auto;
 `;
 
 const PointerIcon = styled(PointerIconSvg)`
   margin-right: 2rem;
-  height: 2rem;
+  height: 1.5rem;
   width: auto;
 `;
 

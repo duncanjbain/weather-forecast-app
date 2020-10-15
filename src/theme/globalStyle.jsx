@@ -9,7 +9,17 @@ const GlobalStyle = createGlobalStyle`
     "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    justify-content: center;
   }
+
+  #root {
+    max-width: 960px;
+    width: 100%;
+    margin: auto 0;
+    padding: 0 1rem;
+  }
+  
 `;
  
 export default GlobalStyle;

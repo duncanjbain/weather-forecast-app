@@ -6,9 +6,6 @@ import LocationSearch from "./Components/LocationSearch"
 
 
 const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 function App() {
