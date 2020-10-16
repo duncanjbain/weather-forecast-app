@@ -8,8 +8,7 @@ const HeaderContainer = styled.header`
   padding: 1rem 0 1rem 0;
 `;
 
-const NavContainer = styled.nav`
-`;
+const NavContainer = styled.nav``;
 
 const NavItems = styled.ul`
   display: flex;
@@ -30,17 +29,17 @@ const Header = () => {
     <HeaderContainer>
       <h1>React Weather App</h1>
       <NavContainer>
-      <NavItems>
-        <NavItem>
-          <NavLink href="https://duncanbain.dev">duncanbain.dev</NavLink>
-        </NavItem>
-        <NavItem>
-          <a href="https://github.com/duncanjbain/">GitHub</a>
-        </NavItem>
-        <NavItem>
-          <a href="https://twitter.com/duncanbain">Twitter</a>
-        </NavItem>
-      </NavItems>
+        <NavItems>
+          <NavItem>
+            <NavLink href="https://duncanbain.dev">duncanbain.dev</NavLink>
+          </NavItem>
+          <NavItem>
+            <a href="https://github.com/duncanjbain/">GitHub</a>
+          </NavItem>
+          <NavItem>
+            <a href="https://twitter.com/duncanbain">Twitter</a>
+          </NavItem>
+        </NavItems>
       </NavContainer>
     </HeaderContainer>
   );
