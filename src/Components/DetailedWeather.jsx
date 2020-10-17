@@ -4,10 +4,20 @@ import { ReactComponent as RainDropSvg } from "../assets/svg/weather/raindrop.sv
 import { ReactComponent as WindSvg } from "../assets/svg/weather/wind.svg";
 import { ReactComponent as HotThermoSvg } from "../assets/svg/weather/thermometer_hot.svg";
 import { ReactComponent as ColdThermoSvg } from "../assets/svg/weather/thermometer_cold.svg";
+import { ReactComponent as ThermoSvg } from "../assets/svg/weather/thermometer.svg";
 
 const DetailedWeatherContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const FeelsLikeInfo = styled.div`
+  display: flex;
+`;
+
+const FeelsLikeThermo = styled(ThermoSvg)`
+  height: 2rem;
+  width: auto;
 `;
 
 const HighLowTempInfo = styled.div`
@@ -15,12 +25,12 @@ const HighLowTempInfo = styled.div`
 `;
 
 const HotThermoIcon = styled(HotThermoSvg)`
-  height: 1.5rem;
+  height: 2rem;
   width: auto;
 `;
 
 const ColdThermoIcon = styled(ColdThermoSvg)`
-  height: 1.5rem;
+  height: 2rem;
   width: auto;
 `;
 
@@ -29,7 +39,7 @@ const WindInfo = styled.div`
 `;
 
 const WindIcon = styled(WindSvg)`
-  height: 1.5rem;
+  height: 2rem;
   width: auto;
 `;
 
@@ -38,14 +48,17 @@ const HumdidityInfo = styled.div`
 `;
 
 const RainDropIcon = styled(RainDropSvg)`
-  height: 1.5rem;
+  height: 2rem;
   width: auto;
 `;
 
 const DetailedWeather = ({ weatherForecast }) => {
   return (
     <DetailedWeatherContainer>
-      <p>Feels like {weatherForecast.current.feels_like}</p>
+      <FeelsLikeInfo>
+        <FeelsLikeThermo />{" "}
+        <p>Feels like {weatherForecast.current.feels_like}</p>
+      </FeelsLikeInfo>
       <HighLowTempInfo>
         <HotThermoIcon /> <p>Hottest {weatherForecast.daily[0].temp.max}</p>
         <ColdThermoIcon /> <p>Coldest {weatherForecast.daily[0].temp.min}</p>
