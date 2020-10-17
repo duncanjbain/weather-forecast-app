@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as RainDropSvg } from "../assets/svg/weather/raindrop.svg";
-import { ReactComponent as WindSvg } from "../assets/svg/weather/wind.svg";
+import { ReactComponent as HumiditySvg } from "../assets/svg/weather/humidity.svg";
+import { ReactComponent as WindSockSvg } from "../assets/svg/weather/wind_sock.svg";
 import { ReactComponent as HotThermoSvg } from "../assets/svg/weather/thermometer_hot.svg";
 import { ReactComponent as ColdThermoSvg } from "../assets/svg/weather/thermometer_cold.svg";
-import { ReactComponent as ThermoSvg } from "../assets/svg/weather/thermometer.svg";
+import { ReactComponent as ThermometerSvg } from "../assets/svg/weather/thermometer.svg";
 
 const DetailedWeatherContainer = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const FeelsLikeInfo = styled.div`
   display: flex;
 `;
 
-const FeelsLikeThermo = styled(ThermoSvg)`
+const ThermometerIcon = styled(ThermometerSvg)`
   height: 2rem;
   width: auto;
 `;
@@ -38,7 +38,7 @@ const WindInfo = styled.div`
   display: flex;
 `;
 
-const WindIcon = styled(WindSvg)`
+const WindSockIcon = styled(WindSockSvg)`
   height: 2rem;
   width: auto;
 `;
@@ -47,7 +47,7 @@ const HumdidityInfo = styled.div`
   display: flex;
 `;
 
-const RainDropIcon = styled(RainDropSvg)`
+const HumidityIcon = styled(HumiditySvg)`
   height: 2rem;
   width: auto;
 `;
@@ -56,7 +56,7 @@ const DetailedWeather = ({ weatherForecast }) => {
   return (
     <DetailedWeatherContainer>
       <FeelsLikeInfo>
-        <FeelsLikeThermo />{" "}
+        <ThermometerIcon />{" "}
         <p>Feels like {weatherForecast.current.feels_like}</p>
       </FeelsLikeInfo>
       <HighLowTempInfo>
@@ -64,12 +64,12 @@ const DetailedWeather = ({ weatherForecast }) => {
         <ColdThermoIcon /> <p>Coldest {weatherForecast.daily[0].temp.min}</p>
       </HighLowTempInfo>
       <WindInfo>
-        <WindIcon />
+        <WindSockIcon />
         <p>Wind</p>
         <p>{weatherForecast.daily[0].wind_speed}</p>
       </WindInfo>
       <HumdidityInfo>
-        <RainDropIcon />
+        <HumidityIcon />
         <p>Humidity</p>
         <p>{weatherForecast.daily[0].humidity}</p>
       </HumdidityInfo>
