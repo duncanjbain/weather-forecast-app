@@ -1,7 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as SearchIconSvg } from "../assets/svg/search.svg";
-import { ReactComponent as PointerIconSvg } from "../assets/svg/pointer.svg";
+import algoliasearch from "algoliasearch/lite";
+import { InstantSearch } from "react-instantsearch-dom";
+import Places from "./Places";
+
+const searchClient = algoliasearch(
+  "latency",
+  "6be0576ff61c053d5f9a3225e2a90f76"
+);
 
 const SearchContainer = styled.div`
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
@@ -13,36 +20,10 @@ const SearchContainer = styled.div`
   position: relative;
 `;
 
-const LocationInput = styled.input`
-  flex: 1;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  height: 3rem;
-  border: none;
-  font-size: 1.125rem;
-  &:focus {
-    outline: none;
-  }
-`;
-
 const SearchIcon = styled(SearchIconSvg)`
   margin-left: 1.5rem;
   height: 1.5rem;
   width: auto;
-`;
-
-const PointerIcon = styled(PointerIconSvg)`
-  margin-right: 1.5rem;
-  height: 1.5rem;
-  width: auto;
-`;
-
-const CurrentLocatonButton = styled.button`
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  height: 100%;
-  display: contents;
 `;
 
 const LocationSearch = ({
@@ -53,14 +34,15 @@ const LocationSearch = ({
   return (
     <SearchContainer>
       <SearchIcon />
-      <LocationInput
-        onChange={updateLocationInput}
-        value={locationSearchInput}
-        placeholder="Enter your location..."
-      />
-      <CurrentLocatonButton>
-        <PointerIcon />
-      </CurrentLocatonButton>
+      <InstantSearch indexName="city" searchClient={searchClient}>
+        <Places
+          defaultRefinement={{
+            lat: 51.5074,
+            lng: 0.1278,
+          }}
+          updateLocationInput={updateLocationInput}
+        />
+      </InstantSearch>
     </SearchContainer>
   );
 };
