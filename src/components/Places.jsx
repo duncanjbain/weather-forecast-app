@@ -21,7 +21,7 @@ class Places extends Component {
     createRef = c => {this.element = c};
 
     componentDidMount() {
-        const { refine, defaultRefinement, updateLocationInput, updateLatLong } = this.props
+        const { refine, defaultRefinement, updateLocationInput, updateLocationLatLong } = this.props
 
         const autocomplete = places({
             container: this.element,
@@ -37,14 +37,14 @@ class Places extends Component {
         });
 
         autocomplete.on('locate', () => {
-            function getLatLong(position) {
-                const latLong = {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                console.log("Latitude is :", position.coords.latitude);
+                console.log("Longitude is :", position.coords.longitude);
+                updateLocationLatLong({
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude
-                }
-                updateLatLong(latLong)
-              }
-            navigator.geolocation.getCurrentPosition(getLatLong);
+                })
+              });
         })
     }
 

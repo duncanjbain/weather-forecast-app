@@ -10,10 +10,15 @@ const AppContainer = styled.div``;
 
 function App() {
   const [locationSearchInput, setLocationSearchInput] = useState("");
+  const [locationLatLong, setLocationLatLong] = useState({});
 
   const updateLocationInput = (latlong) => {
     setLocationSearchInput(latlong);
   };
+
+  const updateLocationLatLong = (latLong) => {
+    setLocationLatLong(latLong)
+  }
 
   const [weatherForecast, setWeatherForecast] = useState(staticWeather);
 
@@ -25,6 +30,7 @@ function App() {
         <LocationSearch
           locationSearchInput={locationSearchInput}
           updateLocationInput={updateLocationInput}
+          updateLocationLatLong={updateLocationLatLong}
         />
         <CurrentWeather weatherForecast={weatherForecast} />
       </AppContainer>

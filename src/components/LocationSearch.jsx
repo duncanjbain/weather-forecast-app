@@ -30,6 +30,7 @@ const LocationSearch = ({
   locationSearchInput,
   updateLocationInput,
   clearLocationInput,
+  updateLocationLatLong,
 }) => {
   return (
     <SearchContainer>
@@ -40,7 +41,7 @@ const LocationSearch = ({
             lat: 51.5074,
             lng: 0.1278,
           }}
-          updateLocationInput={updateLocationInput}
+          updateLocationLatLong={updateLocationLatLong}
         />
       </InstantSearch>
     </SearchContainer>
