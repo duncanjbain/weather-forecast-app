@@ -9,13 +9,8 @@ import CurrentWeather from "./components/CurrentWeather";
 const AppContainer = styled.div``;
 
 function App() {
-  const [locationSearchInput, setLocationSearchInput] = useState("");
   const [locationLatLong, setLocationLatLong] = useState({});
-
-  const updateLocationInput = (latlong) => {
-    setLocationSearchInput(latlong);
-  };
-
+  const [locationName, setLocationName] = useState('');
   const [weatherForecast, setWeatherForecast] = useState(staticWeather);
 
   return (
@@ -24,9 +19,8 @@ function App() {
       <Header />
       <AppContainer>
         <LocationSearch
-          locationSearchInput={locationSearchInput}
-          updateLocationInput={updateLocationInput}
           setLocationLatLong={setLocationLatLong}
+          setLocationName={setLocationName}
         />
         <CurrentWeather weatherForecast={weatherForecast} />
       </AppContainer>

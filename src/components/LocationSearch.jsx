@@ -26,19 +26,14 @@ const SearchIcon = styled(SearchIconSvg)`
   width: auto;
 `;
 
-const LocationSearch = ({
-  locationSearchInput,
-  updateLocationInput,
-  clearLocationInput,
-  setLocationLatLong,
-}) => {
+const LocationSearch = ({ setLocationLatLong, setLocationName }) => {
   return (
     <SearchContainer>
       <SearchIcon />
       <InstantSearch indexName="city" searchClient={searchClient}>
         <Places
-          updateLocationInput={updateLocationInput}
           setLocationLatLong={setLocationLatLong}
+          setLocationName={setLocationName}
         />
       </InstantSearch>
     </SearchContainer>

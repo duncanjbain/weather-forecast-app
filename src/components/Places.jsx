@@ -22,7 +22,7 @@ class Places extends Component {
   };
 
   componentDidMount() {
-    const { refine, updateLocationInput, setLocationLatLong } = this.props;
+    const { refine, setLocationLatLong, setLocationName } = this.props;
 
     const autocomplete = places({
       container: this.element,
@@ -32,20 +32,25 @@ class Places extends Component {
     autocomplete.on("change", (event) => {
       refine(event.suggestion.latlng);
       setLocationLatLong(event.suggestion.latlng);
+      setLocationName(event.suggestion.value);
     });
 
     autocomplete.on("clear", () => {
-        setLocationLatLong({})
+      setLocationLatLong({});
     });
 
     autocomplete.on("locate", () => {
       navigator.geolocation.getCurrentPosition(function (position) {
-        console.log("Latitude is :", position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
         setLocationLatLong({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
+        const placesApiUrl = `https://places-dsn.algolia.net/1/places/reverse?aroundLatLng=${position.coords.latitude},${position.coords.longitude}&hitsPerPage=1&language=en`;
+        fetch(placesApiUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            setLocationName(data.hits[0].city[0]);
+          });
       });
     });
   }
