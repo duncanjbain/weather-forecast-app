@@ -16,10 +16,6 @@ function App() {
     setLocationSearchInput(latlong);
   };
 
-  const updateLocationLatLong = (latLong) => {
-    setLocationLatLong(latLong)
-  }
-
   const [weatherForecast, setWeatherForecast] = useState(staticWeather);
 
   return (
@@ -30,7 +26,7 @@ function App() {
         <LocationSearch
           locationSearchInput={locationSearchInput}
           updateLocationInput={updateLocationInput}
-          updateLocationLatLong={updateLocationLatLong}
+          setLocationLatLong={setLocationLatLong}
         />
         <CurrentWeather weatherForecast={weatherForecast} />
       </AppContainer>

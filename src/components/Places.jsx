@@ -22,7 +22,7 @@ class Places extends Component {
   };
 
   componentDidMount() {
-    const { refine, updateLocationInput, updateLocationLatLong } = this.props;
+    const { refine, updateLocationInput, setLocationLatLong } = this.props;
 
     const autocomplete = places({
       container: this.element,
@@ -31,20 +31,20 @@ class Places extends Component {
 
     autocomplete.on("change", (event) => {
       refine(event.suggestion.latlng);
-      updateLocationInput(event.suggestion);
+      setLocationLatLong(event.suggestion.latlng);
     });
 
     autocomplete.on("clear", () => {
-      console.log("cleared search");
+        setLocationLatLong({})
     });
 
     autocomplete.on("locate", () => {
       navigator.geolocation.getCurrentPosition(function (position) {
         console.log("Latitude is :", position.coords.latitude);
         console.log("Longitude is :", position.coords.longitude);
-        updateLocationLatLong({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+        setLocationLatLong({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
         });
       });
     });

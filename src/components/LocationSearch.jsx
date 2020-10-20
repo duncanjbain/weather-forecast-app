@@ -30,7 +30,7 @@ const LocationSearch = ({
   locationSearchInput,
   updateLocationInput,
   clearLocationInput,
-  updateLocationLatLong,
+  setLocationLatLong,
 }) => {
   return (
     <SearchContainer>
@@ -38,7 +38,7 @@ const LocationSearch = ({
       <InstantSearch indexName="city" searchClient={searchClient}>
         <Places
           updateLocationInput={updateLocationInput}
-          updateLocationLatLong={updateLocationLatLong}
+          setLocationLatLong={setLocationLatLong}
         />
       </InstantSearch>
     </SearchContainer>
