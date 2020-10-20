@@ -37,10 +37,7 @@ const LocationSearch = ({
       <SearchIcon />
       <InstantSearch indexName="city" searchClient={searchClient}>
         <Places
-          defaultRefinement={{
-            lat: 51.5074,
-            lng: 0.1278,
-          }}
+          updateLocationInput={updateLocationInput}
           updateLocationLatLong={updateLocationLatLong}
         />
       </InstantSearch>

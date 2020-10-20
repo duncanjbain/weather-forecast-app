@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import places from "places.js"
-import connect from "../api/places/connector"
-
+import places from "places.js";
+import connect from "../api/places/connector";
 
 const LocationInput = styled.input`
   flex: 1;
@@ -18,46 +17,49 @@ const LocationInput = styled.input`
 `;
 
 class Places extends Component {
-    createRef = c => {this.element = c};
+  createRef = (c) => {
+    this.element = c;
+  };
 
-    componentDidMount() {
-        const { refine, defaultRefinement, updateLocationInput, updateLocationLatLong } = this.props
+  componentDidMount() {
+    const { refine, updateLocationInput, updateLocationLatLong } = this.props;
 
-        const autocomplete = places({
-            container: this.element,
+    const autocomplete = places({
+      container: this.element,
+      type: "city",
+    });
+
+    autocomplete.on("change", (event) => {
+      refine(event.suggestion.latlng);
+      updateLocationInput(event.suggestion);
+    });
+
+    autocomplete.on("clear", () => {
+      console.log("cleared search");
+    });
+
+    autocomplete.on("locate", () => {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        console.log("Latitude is :", position.coords.latitude);
+        console.log("Longitude is :", position.coords.longitude);
+        updateLocationLatLong({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
         });
+      });
+    });
+  }
 
-        autocomplete.on('change', event => {
-            refine(event.suggestion.latlng);
-            updateLocationInput(event.suggestion);
-        });
-
-        autocomplete.on('clear', () => {
-            refine(defaultRefinement)
-        });
-
-        autocomplete.on('locate', () => {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                console.log("Latitude is :", position.coords.latitude);
-                console.log("Longitude is :", position.coords.longitude);
-                updateLocationLatLong({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                })
-              });
-        })
-    }
-
-    render() {
-        return(
-                <LocationInput
-                    ref={this.createRef}
-                    type="search"
-                    id="location-input"
-                    placeholder="Search location..."
-                />
-        );
-    };
+  render() {
+    return (
+      <LocationInput
+        ref={this.createRef}
+        type="search"
+        id="location-input"
+        placeholder="Search location..."
+      />
+    );
+  }
 }
 
 export default connect(Places);
