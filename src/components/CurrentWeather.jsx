@@ -20,14 +20,14 @@ const WeatherInfoContainer = styled.div`
   justify-content: space-around;
 `;
 
-const CurrentWeather = ({ weatherForecast }) => {
+const CurrentWeather = ({ weatherForecast, locationName }) => {
   return (
     <CurrentWeatherContainer>
       <CurrentWeatherHeader>
         <CurrentWeatherHeading>Current Weather</CurrentWeatherHeading>
       </CurrentWeatherHeader>
       <WeatherInfoContainer>
-        <BasicWeather weatherForecast={weatherForecast} />
+        <BasicWeather weatherForecast={weatherForecast} locationName={locationName}/>
         <DetailedWeather weatherForecast={weatherForecast} />
       </WeatherInfoContainer>
     </CurrentWeatherContainer>

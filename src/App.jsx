@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import staticWeather from "./json/staticLondon.json";
 import GlobalStyle from "./theme/globalStyle";
 import styled from "styled-components";
 import Header from "./components/Header";
@@ -10,8 +9,8 @@ const AppContainer = styled.div``;
 
 function App() {
   const [locationLatLong, setLocationLatLong] = useState({});
-  const [locationName, setLocationName] = useState('');
-  const [weatherForecast, setWeatherForecast] = useState(staticWeather);
+  const [locationName, setLocationName] = useState("");
+  const [weatherForecast, setWeatherForecast] = useState(false);
 
   return (
     <>
@@ -21,8 +20,16 @@ function App() {
         <LocationSearch
           setLocationLatLong={setLocationLatLong}
           setLocationName={setLocationName}
+          setWeatherForecast={setWeatherForecast}
         />
-        <CurrentWeather weatherForecast={weatherForecast} />
+        {weatherForecast && (
+          <CurrentWeather
+            weatherForecast={weatherForecast}
+            locationLatLong={locationLatLong}
+            setWeatherForecast={setWeatherForecast}
+            locationName={locationName}
+          />
+        )}
       </AppContainer>
     </>
   );

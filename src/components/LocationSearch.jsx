@@ -26,7 +26,7 @@ const SearchIcon = styled(SearchIconSvg)`
   width: auto;
 `;
 
-const LocationSearch = ({ setLocationLatLong, setLocationName }) => {
+const LocationSearch = ({ setLocationLatLong, setLocationName, setWeatherForecast }) => {
   return (
     <SearchContainer>
       <SearchIcon />
@@ -34,6 +34,7 @@ const LocationSearch = ({ setLocationLatLong, setLocationName }) => {
         <Places
           setLocationLatLong={setLocationLatLong}
           setLocationName={setLocationName}
+          setWeatherForecast={setWeatherForecast}
         />
       </InstantSearch>
     </SearchContainer>

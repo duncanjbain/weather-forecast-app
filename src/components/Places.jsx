@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import places from "places.js";
-import connect from "../api/places/connector";
+import connect from "../services/placesConnector";
+import fetchWeather from "../services/weatherApi" 
 
 const LocationInput = styled.input`
   flex: 1;
@@ -22,7 +23,7 @@ class Places extends Component {
   };
 
   componentDidMount() {
-    const { refine, setLocationLatLong, setLocationName } = this.props;
+    const { refine, setLocationLatLong, setLocationName, setWeatherForecast } = this.props;
 
     const autocomplete = places({
       container: this.element,
@@ -33,6 +34,9 @@ class Places extends Component {
       refine(event.suggestion.latlng);
       setLocationLatLong(event.suggestion.latlng);
       setLocationName(event.suggestion.value);
+      fetchWeather(event.suggestion.latlng).then(forecast => {
+        setWeatherForecast(forecast);
+      })
     });
 
     autocomplete.on("clear", () => {
@@ -51,6 +55,9 @@ class Places extends Component {
           .then((data) => {
             setLocationName(data.hits[0].city[0]);
           });
+        fetchWeather({lat: position.coords.latitude, lng: position.coords.longitude}).then(forecast => {
+          setWeatherForecast(forecast);
+        })
       });
     });
   }
