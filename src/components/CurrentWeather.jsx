@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import BasicWeather from "./BasicWeather";
 import DetailedWeather from "./DetailedWeather";
+import WeeklyWeather from "./WeeklyWeather"
 
 const CurrentWeatherContainer = styled.section`
   display: flex;
@@ -30,6 +31,7 @@ const CurrentWeather = ({ weatherForecast, locationName }) => {
         <BasicWeather weatherForecast={weatherForecast} locationName={locationName}/>
         <DetailedWeather weatherForecast={weatherForecast} />
       </WeatherInfoContainer>
+      <WeeklyWeather dailyForecast={weatherForecast.daily} />
     </CurrentWeatherContainer>
   );
 };

@@ -41,6 +41,7 @@ class Places extends Component {
 
     autocomplete.on("clear", () => {
       setLocationLatLong({});
+      setWeatherForecast(false);
     });
 
     autocomplete.on("locate", () => {
