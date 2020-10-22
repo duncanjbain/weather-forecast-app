@@ -54,7 +54,7 @@ class Places extends Component {
         fetch(placesApiUrl)
           .then((response) => response.json())
           .then((data) => {
-            setLocationName(data.hits[0].city[0]);
+            setLocationName(`${data.hits[0].locale_names[0]}, ${data.hits[0].administrative[0]}, ${data.hits[0].country}`);
           });
         fetchWeather({lat: position.coords.latitude, lng: position.coords.longitude}).then(forecast => {
           setWeatherForecast(forecast);
