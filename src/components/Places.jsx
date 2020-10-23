@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import places from "places.js";
 import connect from "../services/placesConnector";
-import fetchWeather from "../services/weatherApi" 
+import fetchWeather from "../services/weatherApi";
 
 const LocationInput = styled.input`
   flex: 1;
@@ -23,7 +23,12 @@ class Places extends Component {
   };
 
   componentDidMount() {
-    const { refine, setLocationLatLong, setLocationName, setWeatherForecast } = this.props;
+    const {
+      refine,
+      setLocationLatLong,
+      setLocationName,
+      setWeatherForecast,
+    } = this.props;
 
     const autocomplete = places({
       container: this.element,
@@ -32,19 +37,18 @@ class Places extends Component {
 
     autocomplete.on("change", (event) => {
       refine(event.suggestion.latlng);
-        localStorage.setItem('lat',event.suggestion.latlng.lat)
-        localStorage.setItem('lng',event.suggestion.latlng.lng)
-      localStorage.setItem('latLng',JSON.stringify(event.suggestion.latlng))
+      localStorage.setItem("lat", event.suggestion.latlng.lat);
+      localStorage.setItem("lng", event.suggestion.latlng.lng);
       setLocationName(event.suggestion.value);
-      fetchWeather(event.suggestion.latlng).then(forecast => {
+      fetchWeather(event.suggestion.latlng).then((forecast) => {
         setWeatherForecast(forecast);
-      })
+      });
     });
 
     autocomplete.on("clear", () => {
       setLocationLatLong({});
       setWeatherForecast(false);
-      localStorage.removeItem('latLng')
+      localStorage.removeItem("latLng");
     });
 
     autocomplete.on("locate", () => {
@@ -52,19 +56,24 @@ class Places extends Component {
         const latLng = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
-        }
+        };
         setLocationLatLong(latLng);
-        localStorage.setItem('lat',position.coords.latitude)
-        localStorage.setItem('lng',position.coords.longitud)
+        localStorage.setItem("lat", latLng.lat);
+        localStorage.setItem("lng", latLng.lat);
         const placesApiUrl = `https://places-dsn.algolia.net/1/places/reverse?aroundLatLng=${position.coords.latitude},${position.coords.longitude}&hitsPerPage=1&language=en`;
         fetch(placesApiUrl)
           .then((response) => response.json())
           .then((data) => {
-            setLocationName(`${data.hits[0].locale_names[0]}, ${data.hits[0].administrative[0]}, ${data.hits[0].country}`);
+            setLocationName(
+              `${data.hits[0].locale_names[0]}, ${data.hits[0].administrative[0]}, ${data.hits[0].country}`
+            );
           });
-        fetchWeather({lat: position.coords.latitude, lng: position.coords.longitude}).then(forecast => {
+        fetchWeather({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        }).then((forecast) => {
           setWeatherForecast(forecast);
-        })
+        });
       });
     });
   }
