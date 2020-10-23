@@ -32,7 +32,9 @@ class Places extends Component {
 
     autocomplete.on("change", (event) => {
       refine(event.suggestion.latlng);
-      setLocationLatLong(event.suggestion.latlng);
+        localStorage.setItem('lat',event.suggestion.latlng.lat)
+        localStorage.setItem('lng',event.suggestion.latlng.lng)
+      localStorage.setItem('latLng',JSON.stringify(event.suggestion.latlng))
       setLocationName(event.suggestion.value);
       fetchWeather(event.suggestion.latlng).then(forecast => {
         setWeatherForecast(forecast);
@@ -42,14 +44,18 @@ class Places extends Component {
     autocomplete.on("clear", () => {
       setLocationLatLong({});
       setWeatherForecast(false);
+      localStorage.removeItem('latLng')
     });
 
     autocomplete.on("locate", () => {
       navigator.geolocation.getCurrentPosition(function (position) {
-        setLocationLatLong({
+        const latLng = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
-        });
+        }
+        setLocationLatLong(latLng);
+        localStorage.setItem('lat',position.coords.latitude)
+        localStorage.setItem('lng',position.coords.longitud)
         const placesApiUrl = `https://places-dsn.algolia.net/1/places/reverse?aroundLatLng=${position.coords.latitude},${position.coords.longitude}&hitsPerPage=1&language=en`;
         fetch(placesApiUrl)
           .then((response) => response.json())
