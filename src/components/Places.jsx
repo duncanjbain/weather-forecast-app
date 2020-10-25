@@ -38,6 +38,7 @@ class Places extends Component {
     autocomplete.on("change", (event) => {
       refine(event.suggestion.latlng);
       setLocationLatLong(event.suggestion.latlng);
+      console.log(event.suggestion.name)
       setLocationName(event.suggestion.name);
       console.log(event.suggestion);
       localStorage.setItem("lat", event.suggestion.latlng.lat);
@@ -45,6 +46,7 @@ class Places extends Component {
       fetchWeather(event.suggestion.latlng).then((forecast) => {
         setWeatherForecast(forecast);
       });
+      
     });
 
     autocomplete.on("clear", () => {
@@ -67,9 +69,9 @@ class Places extends Component {
           .then((response) => response.json())
           .then((data) => {
             setLocationName(
-              `${data.hits[0].locale_names[0]}`
-
+              `${data.hits[0].name}`
             );
+            console.log(data)
           });
         fetchWeather({
           lat: position.coords.latitude,

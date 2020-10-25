@@ -19,7 +19,7 @@ function App() {
       fetch(placesApiUrl)
         .then((response) => response.json())
         .then((data) => {
-          setLocationName(`${data.hits[0].locale_names[0]}, ${data.hits[0].administrative[0]}, ${data.hits[0].country}`);
+          setLocationName(`${data.hits[0].locale_names[0]}`);
         });
       fetchWeather({lat: localStorage.getItem('lat'), lng: localStorage.getItem('lng')}).then(forecast => {
         setWeatherForecast(forecast);
