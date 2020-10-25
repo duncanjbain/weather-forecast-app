@@ -37,15 +37,11 @@ class Places extends Component {
 
     autocomplete.on("change", (event) => {
       refine(event.suggestion.latlng);
-<<<<<<< HEAD
       setLocationLatLong(event.suggestion.latlng);
       setLocationName(event.suggestion.name);
       console.log(event.suggestion);
-=======
       localStorage.setItem("lat", event.suggestion.latlng.lat);
       localStorage.setItem("lng", event.suggestion.latlng.lng);
-      setLocationName(event.suggestion.value);
->>>>>>> 43ceb6c24ef9c7284f0bcffc16f28f6ed228b587
       fetchWeather(event.suggestion.latlng).then((forecast) => {
         setWeatherForecast(forecast);
       });
