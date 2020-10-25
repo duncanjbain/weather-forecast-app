@@ -1,78 +1,62 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as HumiditySvg } from "../assets/svg/weather/humidity.svg";
-import { ReactComponent as WindSockSvg } from "../assets/svg/weather/wind_sock.svg";
-import { ReactComponent as HotThermoSvg } from "../assets/svg/weather/thermometer_hot.svg";
-import { ReactComponent as ColdThermoSvg } from "../assets/svg/weather/thermometer_cold.svg";
-import { ReactComponent as ThermometerSvg } from "../assets/svg/weather/thermometer.svg";
+import { ReactComponent as SunsetSvg } from "../assets/svg/weather/sunset.svg"
+import { ReactComponent as SunriseSvg } from "../assets/svg/weather/sunrise.svg"
+import { ReactComponent as WindSvg } from "../assets/svg/weather/wind.svg"
+import { ReactComponent as RaindropSvg } from "../assets/svg/weather/raindrop.svg"
+import { ReactComponent as CloudsunSvg } from "../assets/svg/weather/cloudsun.svg"
 
 const DetailedWeatherContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 `;
 
-const FeelsLikeInfo = styled.div`
-  display: flex;
+const IconImg = styled.img`
 `;
 
-const ThermometerIcon = styled(ThermometerSvg)`
-  height: 2rem;
-  width: auto;
+const SunsetSvgIcon = styled(SunsetSvg)`
+  width: 2.5rem;
+  height: auto;
 `;
 
-const HighLowTempInfo = styled.div`
-  display: flex;
+const SunriseSvgIcon = styled(SunriseSvg)`
+  width: 2.5rem;
+  height: auto;
 `;
 
-const HotThermoIcon = styled(HotThermoSvg)`
-  height: 2rem;
-  width: auto;
+const WindSvgIcon = styled(WindSvg)`
+  width: 2.5rem;
+  height: auto;
+`;
+const RaindropSvgIcon = styled(RaindropSvg)`
+  width: 2.5rem;
+  height: auto;
 `;
 
-const ColdThermoIcon = styled(ColdThermoSvg)`
-  height: 2rem;
-  width: auto;
-`;
-
-const WindInfo = styled.div`
-  display: flex;
-`;
-
-const WindSockIcon = styled(WindSockSvg)`
-  height: 2rem;
-  width: auto;
-`;
-
-const HumdidityInfo = styled.div`
-  display: flex;
-`;
-
-const HumidityIcon = styled(HumiditySvg)`
-  height: 2rem;
-  width: auto;
+const CloudsunSvgIcon = styled(CloudsunSvg)`
+  width: 2.5rem;
+  height: auto;
 `;
 
 const DetailedWeather = ({ weatherForecast }) => {
   return (
     <DetailedWeatherContainer>
-      <FeelsLikeInfo>
-        <ThermometerIcon />{" "}
-        <p>Feels like {weatherForecast.current.feels_like}</p>
-      </FeelsLikeInfo>
-      <HighLowTempInfo>
-        <HotThermoIcon /> <p>Hottest {weatherForecast.daily[0].temp.max}</p>
-        <ColdThermoIcon /> <p>Coldest {weatherForecast.daily[0].temp.min}</p>
-      </HighLowTempInfo>
-      <WindInfo>
-        <WindSockIcon />
-        <p>Wind</p>
-        <p>{weatherForecast.daily[0].wind_speed}</p>
-      </WindInfo>
-      <HumdidityInfo>
-        <HumidityIcon />
-        <p>Humidity</p>
-        <p>{weatherForecast.daily[0].humidity}</p>
-      </HumdidityInfo>
+      <div style={{display: "flex"}}>
+        <CloudsunSvgIcon /><p>Clouds {weatherForecast.current.clouds}%</p>
+      </div>
+      <div style={{display: "flex"}}>
+        <RaindropSvgIcon /><p>Humidity {weatherForecast.current.humidity}%</p>
+      </div>
+      <div style={{display: "flex"}}>
+        <WindSvgIcon /><p>Wind {weatherForecast.current.wind_speed} m/s</p>
+      </div>
+      <div style={{display: "flex"}}>
+        <SunriseSvgIcon /><p>Sunrise{weatherForecast.current.sunrise}</p>
+      </div>
+      <div style={{display: "flex"}}>
+      <SunsetSvgIcon /><p>Sunset {weatherForecast.current.sunset}</p>
+      </div>
     </DetailedWeatherContainer>
   );
 };

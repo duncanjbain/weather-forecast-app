@@ -1,24 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import CelsiusFahrenheit from "./CelsiusFahrenheit"
 
 const BasicWeatherContainer = styled.div`
   display: flex;
-  flex-direction: column;
 `;
 
-const WeatherIconTemperature = styled.div`
-  display: flex;
+const CurrentTemperature = styled.h2`
+font-size: 4rem;
 `;
 
 const BasicWeather = ({ weatherForecast, locationName }) => {
   return (
     <BasicWeatherContainer>
-      <h3>{locationName}</h3>
-      <WeatherIconTemperature>
-        <p>Sunny</p>
-        <p>{weatherForecast.current.temp}</p>
-      </WeatherIconTemperature>
-      <h3>{weatherForecast.current.weather[0].description}</h3>
+      <CurrentTemperature>{weatherForecast.current.temp}</CurrentTemperature>
+      <CelsiusFahrenheit />
     </BasicWeatherContainer>
   );
 };

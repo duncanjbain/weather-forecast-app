@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import places from "places.js";
 import connect from "../services/placesConnector";
-import fetchWeather from "../services/weatherApi" 
+import fetchWeather from "../services/weatherApi";
 
 const LocationInput = styled.input`
   flex: 1;
@@ -23,7 +23,12 @@ class Places extends Component {
   };
 
   componentDidMount() {
-    const { refine, setLocationLatLong, setLocationName, setWeatherForecast } = this.props;
+    const {
+      refine,
+      setLocationLatLong,
+      setLocationName,
+      setWeatherForecast,
+    } = this.props;
 
     const autocomplete = places({
       container: this.element,
@@ -33,10 +38,11 @@ class Places extends Component {
     autocomplete.on("change", (event) => {
       refine(event.suggestion.latlng);
       setLocationLatLong(event.suggestion.latlng);
-      setLocationName(event.suggestion.value);
-      fetchWeather(event.suggestion.latlng).then(forecast => {
+      setLocationName(event.suggestion.name);
+      console.log(event.suggestion);
+      fetchWeather(event.suggestion.latlng).then((forecast) => {
         setWeatherForecast(forecast);
-      })
+      });
     });
 
     autocomplete.on("clear", () => {
@@ -54,11 +60,16 @@ class Places extends Component {
         fetch(placesApiUrl)
           .then((response) => response.json())
           .then((data) => {
-            setLocationName(`${data.hits[0].locale_names[0]}, ${data.hits[0].administrative[0]}, ${data.hits[0].country}`);
+            setLocationName(
+              `${data.hits[0].locale_names[0]}`
+            );
           });
-        fetchWeather({lat: position.coords.latitude, lng: position.coords.longitude}).then(forecast => {
+        fetchWeather({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        }).then((forecast) => {
           setWeatherForecast(forecast);
-        })
+        });
       });
     });
   }
